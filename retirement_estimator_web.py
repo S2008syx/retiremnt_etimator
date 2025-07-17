@@ -1,4 +1,4 @@
-bingqie#口令：streamlit run ~/PycharmProjects/PythonProject7/.venv/bin/web1.py
+#口令：streamlit run ~/PycharmProjects/PythonProject7/.venv/bin/web1.py
 import streamlit as st
 import matplotlib.pyplot as plt
 
