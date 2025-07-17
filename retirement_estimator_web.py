@@ -1,4 +1,4 @@
-#口令：streamlit run ~/PycharmProjects/PythonProject7/.venv/bin/web1.py
+bingqie#口令：streamlit run ~/PycharmProjects/PythonProject7/.venv/bin/web1.py
 import streamlit as st
 import matplotlib.pyplot as plt
 
@@ -79,4 +79,4 @@ ax.set_ylabel("Total Assets ($)")
 ax.legend()
 st.pyplot(fig)
 
-st.success("本模拟器默认州税为0")
+st.success("本模拟器默认州税为0，并且在401k部分结合里取出时的分段税率")
