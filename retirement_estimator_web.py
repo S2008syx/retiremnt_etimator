@@ -3,9 +3,9 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 # 【一、输入参数】
-st.title("401k 退休资产模拟器（sibo_song)")
+st.title("退休资产模拟器（sibo_song)")
 
-store = st.number_input("每年给401k资金", value=30000)
+store = st.number_input("每年给401k资金(退休前给)(没有给就是0)", value=30000)
 prin = st.number_input("退休时非401k资产总额", value=5000000)
 spend = st.number_input("每年退休生活支出", value=200000)
 portion = st.slider("每年使用多少比例的401k", 0.0, 1.0, 0.5)
