@@ -79,4 +79,4 @@ ax.set_ylabel("Total Assets ($)")
 ax.legend()
 st.pyplot(fig)
 
-st.success("本模拟器默认州税为0，并且在401k部分结合里取出时的分段税率")
+st.success("本模拟器默认州税为0，并且在401k部分里以结合取出时的分段税率")
