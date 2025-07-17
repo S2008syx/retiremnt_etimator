@@ -9,7 +9,7 @@ store = st.number_input("每年给401k资金(退休前给)(没有给就是0)", v
 prin = st.number_input("退休时非401k资产总额", value=5000000)
 spend = st.number_input("每年退休生活支出", value=200000)
 portion = st.slider("每年使用多少比例的401k", 0.0, 1.0, 0.5)
-interest = st.number_input("投资年收益率(401k和本金投资）", value=1.06)
+interest = st.number_input("投资年收益率(401k和本金投资)(税后)", value=1.06)
 inflation = st.number_input("年通股率（你每年的支出要增长）", value=1.03)
 
 # 【二、Ё累积阶段】
