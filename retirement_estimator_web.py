@@ -98,9 +98,9 @@ fig, ax = plt.subplots()
 ax.plot(range(1, len(totalP_list) + 1), totalP_list, label="Total Assets ($)")
 ax.set_title("Total Retirement Asset Over Time")
 for year in [1, 10, 20, 30, 40, 50]:
-    if year <= len(totalP_list):
-        value = totalP_list[year - 1]
-        ax.annotate(f"${value:,.0f}", (year, value),
+    if yearx <= len(totalP_list):
+        value = totalP_list[yearx - 1]
+        ax.annotate(f"${value:,.0f}", (yearx, value),
                     textcoords="offset points", xytext=(0, 8), ha='center', fontsize=8)
 
 ax.set_xlabel("Years After Retirement")
@@ -112,10 +112,10 @@ st.pyplot(fig)
 fig, ax = plt.subplots()
 ax.plot(range(1, len(list_tax) + 1), list_tax, label="Tax Rates of 401k")
 ax.set_title("401k Tax Rate Over the Years")
-for year in [1, 5, 10, 15, 20, 25]:
-    if year <= len(list_tax):
-        value = list_tax[year - 1]
-        ax.annotate(f"{value * 100:.1f}%", (year, value),
+for yearx in [1, 5, 10, 15, 20, 25]:
+    if yearx <= len(list_tax):
+        value = list_tax[yearx - 1]
+        ax.annotate(f"{value * 100:.1f}%", (yearx, value),
                     textcoords="offset points", xytext=(0, 8), ha='center', fontsize=8)
 
 ax.set_xlabel("Years After Retirement")
@@ -127,10 +127,10 @@ st.pyplot(fig)
 fig, ax = plt.subplots()
 ax.plot(range(1, len(Total_spend_list) + 1), Total_spend_list, label="Annual Spending")
 ax.set_title("Annual Spending After Retirement")
-or year in [1, 10, 20, 30, 40, 50]:
-    if year <= len(Total_spend_list):
-        value = Total_spend_list[year - 1]
-        ax.annotate(f"${value:,.0f}", (year, value),
+or yearx in [1, 10, 20, 30, 40, 50]:
+    if yearx <= len(Total_spend_list):
+        value = Total_spend_list[yearx - 1]
+        ax.annotate(f"${value:,.0f}", (yearx, value),
                     textcoords="offset points", xytext=(0, 8), ha='center', fontsize=8)
 
 ax.set_xlabel("Years After Retirement")
