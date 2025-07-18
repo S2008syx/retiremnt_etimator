@@ -102,6 +102,7 @@ for yearx in [1, 10, 20, 30, 40, 50]:
         value = totalP_list[yearx - 1]
         ax.annotate(f"${value:,.0f}", (yearx, value),
                     textcoords="offset points", xytext=(0, 8), ha='center', fontsize=8)
+      ax.plot(yearx, value, 'ko')
 
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Total Assets ($)")
@@ -117,6 +118,7 @@ for yearx in [1, 5, 10, 15, 20, 25]:
         value = list_tax[yearx - 1]
         ax.annotate(f"{value * 100:.1f}%", (yearx, value),
                     textcoords="offset points", xytext=(0, 8), ha='center', fontsize=8)
+      ax.plot(yearx, value, 'ko')
 
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Annual Tax Rate")
@@ -132,6 +134,7 @@ for yearx in [1, 10, 20, 30, 40, 50]:
         value = Total_spend_list[yearx - 1]
         ax.annotate(f"${value:,.0f}", (yearx, value),
                     textcoords="offset points", xytext=(0, 8), ha='center', fontsize=8)
+      ax.plot(yearx, value, 'ko')
 
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Annual Spending")
