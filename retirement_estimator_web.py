@@ -21,7 +21,7 @@ if calculation_mode == "Use the preloaded calculator":
     interest1 = st.number_input(
     "401k Annual Compounded Return Rate(During Accumulation Period)",
     value=1.06,
-    help="Expected compounded annual return rate of 401k during the accumulation phase. E.g., enter 1.06 for 6%."
+    help="Expected compounded annual return rate of 401k during the accumulation phase.(No capital gains tax for 401K, it is regard as ordinary income tax)"
 )
     GroR = interest1
     retire = 0
