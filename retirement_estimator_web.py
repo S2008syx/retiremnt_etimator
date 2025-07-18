@@ -40,7 +40,7 @@ else:
     st.subheader("Manual 401k Input")
     user_input = st.number_input(
     "Current 401k Balance (for users no longer contributing) ($)",
-    value=0,
+    value=500000,
     help="If you already know your current 401k balance and are no longer making contributions"
 )
 
@@ -49,10 +49,10 @@ else:
 retire_display.markdown(f"**Total Amount of 401k：** `${retire:,.0f}`")
 st.subheader("🎯 Retirement Planning Begins")
 
-prin = st.number_input("Total Other Assets at Retirement (excluding 401k)", value=5000000,
+prin = st.number_input("Total Other Assets at Retirement (excluding 401k)", value=2000000,
                        help="Includes bank savings, stocks, real estate, and other liquid assets.")
 
-spend = st.number_input("Estimated Annual Retirement Expenses", value=200000,
+spend = st.number_input("Estimated Annual Retirement Expenses", value=100000,
                         help="Adjust based on your lifestyle and region.")
 
 portion = st.slider("Proportion of Expenses Covered by 401k", 0.0, 1.0, 0.5,
