@@ -14,27 +14,12 @@ calculation_mode = st.radio(
 )
 
 retire_display = st.empty()
-user_input = st.number_input("Current 401k Balance (for users no longer contributing) Entering your current 401k balance here will override the annual contribution and years of saving", value=0,
-                             help="If you are still contributing to your 401k, leave this blank; otherwise, enter the current balance.")
-
-prin = st.number_input("Total Other Assets at Retirement (excluding 401k)", value=5000000,
-                       help="Includes bank savings, stocks, real estate, and other liquid assets.")
-
-spend = st.number_input("Estimated Annual Retirement Expenses", value=200000,
-                        help="Adjust based on your lifestyle and region.")
-
-portion = st.slider("Proportion of Expenses Covered by 401k", 0.0, 1.0, 0.5,
-                    help="For example: 0.5 means 50% of annual spending comes from your 401k, the rest from other assets.")
-
-interest = st.number_input("Expected Annual Return Rate (after tax)", value=1.06,
-                           help="Expected average investment return rate for both 401k and other assets. Enter 1.06 for 6%.")
-
-inflation = st.number_input("Expected Annual Inflation Rate", value=1.03,
-                            help="Affects growth in annual expenses. Enter 1.03 for 3% inflation.")
-
-# 【二、401k累积阶段】
-
-GroR = interest
+interest1 = st.number_input(
+    "401k Annual Compounded Return Rate, During Accumulation Period",
+    value=1.06,
+    help="Expected compounded annual return rate of 401k during the accumulation phase. E.g., enter 1.06 for 6%."
+)
+GroR = interest1
 if calculation_mode == "Use the preloaded calculator":
     retire = 0
     years = st.slider("Number of Years Contributing to 401k", 0, 50, 25,
@@ -52,6 +37,27 @@ else:
   retire = user_input
 
 retire_display.markdown(f"**Total Amount of 401k：** `${retire:,.0f}`")
+user_input = st.number_input("Current 401k Balance (for users no longer contributing) Entering your current 401k balance here will override the annual contribution and years of saving", value=0,
+                             help="If you are still contributing to your 401k, leave this blank; otherwise, enter the current balance.")
+
+prin = st.number_input("Total Other Assets at Retirement (excluding 401k)", value=5000000,
+                       help="Includes bank savings, stocks, real estate, and other liquid assets.")
+
+spend = st.number_input("Estimated Annual Retirement Expenses", value=200000,
+                        help="Adjust based on your lifestyle and region.")
+
+portion = st.slider("Proportion of Expenses Covered by 401k", 0.0, 1.0, 0.5,
+                    help="For example: 0.5 means 50% of annual spending comes from your 401k, the rest from other assets.")
+
+interest = st.number_input("Expected Annual Return Rate (After Tax) During Retirement", value=1.06,
+                           help="Expected average investment return rate for both 401k and other assets after retirement. Enter 1.06 for 6%.")
+
+inflation = st.number_input("Expected Annual Inflation Rate", value=1.03,
+                            help="Affects growth in annual expenses. Enter 1.03 for 3% inflation.")
+
+# 【二、401k累积阶段】
+
+
 
 
 # 【三、退休模拟】
