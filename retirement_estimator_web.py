@@ -69,7 +69,7 @@ while x < 51:
     Total_spend = spend * (inflation ** x)
     retire_spend = spend * (inflation ** x) * portion
     tax = get_tax_rate(retire_spend)
-    list_tax.append(tax)
+    list_tax.append(1-tax)
     Total_spend_list.append(Total_spend)
     prin_balance = prin_balance * interest - spend * (inflation ** x) * (1 - portion)
     retire_balance = retire_balance * interest - retire_spend / tax
