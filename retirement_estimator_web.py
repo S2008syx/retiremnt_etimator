@@ -113,7 +113,7 @@ st.pyplot(fig)
 fig, ax = plt.subplots()
 ax.plot(range(1, len(list_tax) + 1), list_tax, label="Tax Rates of 401k")
 ax.set_title("401k Tax Rate Over the Years")
-for yearx in [1, 5, 10, 15, 20, 25，30，35，40，45]:
+for yearx in [1,5,10,15,20,25,30,35,40,45,50]:
     if yearx <= len(list_tax):
         value = list_tax[yearx - 1]
         ax.annotate(f"{value * 100:.1f}%", (yearx, value),
