@@ -127,7 +127,7 @@ while x < 51:
 fig, ax = plt.subplots()
 ax.plot(range(1, len(totalP_list) + 1), totalP_list, label="Total Assets ($)")
 ax.set_title("Total Retirement Asset Over Time")
-for yearx in [0, 10, 20, 30, 40, 50]:
+for yearx in [1, 10, 20, 30, 40, 50]:
     if yearx <= len(totalP_list):
         value = totalP_list[yearx - 1]
         ax.annotate(f"${value:,.0f}", (yearx, value),
@@ -144,7 +144,7 @@ st.pyplot(fig)
 fig, ax = plt.subplots()
 ax.plot(range(1, len(list_tax) + 1), list_tax, label="Tax Rates of 401k")
 ax.set_title("401k Tax Rate Over the Years")
-for yearx in [0,5,10,15,20,25,30,35,40,45,50]:
+for yearx in [1,5,10,15,20,25,30,35,40,45,50]:
     if yearx <= len(list_tax):
         value = list_tax[yearx - 1]
         ax.annotate(f"{value * 100:.1f}%", (yearx, value),
@@ -160,7 +160,7 @@ st.pyplot(fig)
 fig, ax = plt.subplots()
 ax.plot(range(1, len(Total_spend_list) + 1), Total_spend_list, label="Annual Spending")
 ax.set_title("Annual Spending After Retirement")
-for yearx in [0, 10, 20, 30, 40, 50]:
+for yearx in [1, 10, 20, 30, 40, 50]:
     if yearx <= len(Total_spend_list):
         value = Total_spend_list[yearx - 1]
         ax.annotate(f"${value:,.0f}", (yearx, value),
