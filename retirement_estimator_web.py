@@ -97,7 +97,7 @@ while x < 51:
 fig, ax = plt.subplots()
 ax.plot(range(1, len(totalP_list) + 1), totalP_list, label="Total Assets ($)")
 ax.set_title("Total Retirement Asset Over Time")
-for year in [1, 10, 20, 30, 40, 50]:
+for yearx in [1, 10, 20, 30, 40, 50]:
     if yearx <= len(totalP_list):
         value = totalP_list[yearx - 1]
         ax.annotate(f"${value:,.0f}", (yearx, value),
