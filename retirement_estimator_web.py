@@ -6,7 +6,7 @@ def millions(x, pos):
 formatter = FuncFormatter(millions)
 
 
-# 【1、标题和用户输入】
+# 【1、标题和用户输入 & 401K计算】
 st.title("Retirement Asset Planning Simulator (By Sibo Song)")
 calculation_mode = st.radio(
     "Choose how you want to calculate your 401k amount",
@@ -14,19 +14,22 @@ calculation_mode = st.radio(
 )
 
 retire_display = st.empty()
-interest1 = st.number_input(
+
+
+if calculation_mode == "Use the preloaded calculator":
+    st.subheader("401k Growth During Accumulation Period")
+    interest1 = st.number_input(
     "401k Annual Compounded Return Rate(During Accumulation Period)",
     value=1.06,
     help="Expected compounded annual return rate of 401k during the accumulation phase. E.g., enter 1.06 for 6%."
 )
-GroR = interest1
-if calculation_mode == "Use the preloaded calculator":
+    GroR = interest1
     retire = 0
     years = st.slider("Number of Years Contributing to 401k", 0, 50, 25,
                   help="For example: If you have contributed to your 401k for 15 years, set this to 15.")
 
 
-    store = st.number_input("Annual 401k Contribution Before Retirement", value=30000,
+    store = st.number_input("Annual 401k Contribution Before Retirement($)", value=30000,
                             help="Enter the amount you contribute annually to your 401k before retirement. Enter 0 if not applicable.")
     for _ in range(years):
         
@@ -34,8 +37,8 @@ if calculation_mode == "Use the preloaded calculator":
        
                         
 else:
-    user_input = st.number_input("Current 401k Balance (for users no longer contributing) Entering your current 401k balance here will override the annual contribution and years of saving", value=0,
-                             help="If you are still contributing to your 401k, leave this blank; otherwise, enter the current balance.")
+    st.subheader("Manual 401k Input")
+    user_input = st.number_input("Current 401k Balance (for users no longer contributing)($)")
 
     retire = user_input
 
@@ -56,12 +59,10 @@ interest = st.number_input("Expected Annual Return Rate (After Tax) During Retir
 inflation = st.number_input("Expected Annual Inflation Rate", value=1.03,
                             help="Affects growth in annual expenses. Enter 1.03 for 3% inflation.")
 
-# 【二、401k累积阶段】
 
 
 
-
-# 【三、退休模拟】
+# 【二、退休模拟】
 x = 1
 totalP = 0
 prin_balance = prin
@@ -107,7 +108,7 @@ while x < 51:
         break
     x += 1
 
-# 【四、401k耗尽后，仅用本金模拟】
+# 【三、401k耗尽后，仅用本金模拟】
 while x < 51:
     totalP = totalP * interest - spend * (inflation ** x)
     totalP_list.append(totalP)
@@ -116,7 +117,7 @@ while x < 51:
         break
     x += 1
 
-# 【五、图表显示】
+# 【四、图表显示】
 #total principal graph
 fig, ax = plt.subplots()
 ax.plot(range(1, len(totalP_list) + 1), totalP_list, label="Total Assets ($)")
@@ -168,5 +169,5 @@ ax.legend()
 ax.grid(True)
 st.pyplot(fig)
 
-# 【六、附加说明】
+# 【五、附加说明】
 st.success("Note: This simulator assumes zero state tax. Federal taxes are calculated based on marginal brackets and only apply to 401k withdrawals. Other assets are assumed to be tax-free.")
