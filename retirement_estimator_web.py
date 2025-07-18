@@ -5,14 +5,8 @@ def millions(x, pos):
     return f'${int(x):,}'
 formatter = FuncFormatter(millions)
 
-# 【一、401k累积阶段】
-retire = 0
-GroR = interest
-for _ in range(years):
-    retire = (retire + store) * GroR
-if user_input != 0:
-    retire = user_input
-# 【二、标题和用户输入】
+
+# 【1、标题和用户输入】
 st.title("Retirement Asset Planning Simulator (By Sibo Song)")
 
 
@@ -23,7 +17,7 @@ years = st.slider("Number of Years Contributing to 401k", 0, 50, 25,
 
 store = st.number_input("Annual 401k Contribution Before Retirement", value=30000,
                         help="Enter the amount you contribute annually to your 401k before retirement. Enter 0 if not applicable.")
-st.markdown(f"**退休总资产：** `${retire:,.0f}`")
+retire_display = st.empty()
 user_input = st.number_input("Current 401k Balance (for users no longer contributing) Entering your current 401k balance here will override the annual contribution and years of saving", value=0,
                              help="If you are still contributing to your 401k, leave this blank; otherwise, enter the current balance.")
 
@@ -42,7 +36,14 @@ interest = st.number_input("Expected Annual Return Rate (after tax)", value=1.06
 inflation = st.number_input("Expected Annual Inflation Rate", value=1.03,
                             help="Affects growth in annual expenses. Enter 1.03 for 3% inflation.")
 
-
+# 【二、401k累积阶段】
+retire = 0
+GroR = interest
+for _ in range(years):
+    retire = (retire + store) * GroR
+if user_input != 0:
+    retire = user_input
+retire_display.markdown(f"**退休总资产：** `${retire:,.0f}`")
 
 # 【三、退休模拟】
 x = 1
