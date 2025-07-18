@@ -10,7 +10,7 @@ formatter = FuncFormatter(millions)
 st.title("Retirement Asset Planning Simulator (By Sibo Song)")
 calculation_mode = st.radio(
     "Choose how you want to calculate your 401k amount",
-    ("Use the preloaded calculator", "I know my 401k amount and prefer to enter it manually")
+    ("Use the 401K preloaded calculator", "I know my 401k amount and prefer to enter it manually")
 )
 
 retire_display = st.empty()
