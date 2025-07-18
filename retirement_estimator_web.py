@@ -1,5 +1,9 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
+def millions(x, pos):
+    return f'${int(x):,}'
+formatter = FuncFormatter(millions)
 # 【一、标题和用户输入】
 st.title("Retirement Asset Planning Simulator (By Sibo Song)")
 
@@ -106,6 +110,7 @@ for yearx in [1, 10, 20, 30, 40, 50]:
 
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Total Assets ($)")
+plt.gca().yaxis.set_major_formatter(formatter)
 ax.legend()
 ax.grid(True)
 st.pyplot(fig)
@@ -122,6 +127,7 @@ for yearx in [1,5,10,15,20,25,30,35,40,45,50]:
 
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Annual Tax Rate")
+plt.gca().yaxis.set_major_formatter(formatter)
 ax.legend()
 ax.grid(True)
 st.pyplot(fig)
@@ -138,6 +144,7 @@ for yearx in [1, 10, 20, 30, 40, 50]:
 
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Annual Spending")
+plt.gca().yaxis.set_major_formatter(formatter)
 ax.legend()
 ax.grid(True)
 st.pyplot(fig)
