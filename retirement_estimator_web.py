@@ -93,28 +93,32 @@ while x < 51:
     x += 1
 
 # 【五、图表显示】
+#total principal graph
 fig, ax = plt.subplots()
 ax.plot(range(1, len(totalP_list) + 1), totalP_list, label="Total Assets ($)")
 ax.set_title("Total Retirement Asset Over Time")
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Total Assets ($)")
 ax.legend()
+ax.grid(True)
 st.pyplot(fig)
-
+#tax rates graph
 fig, ax = plt.subplots()
 ax.plot(range(1, len(list_tax) + 1), list_tax, label="Tax Rates of 401k")
 ax.set_title("401k Tax Rate Over the Years")
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Annual Tax Rate")
 ax.legend()
+ax.grid(True)
 st.pyplot(fig)
-
+#annually spending graph
 fig, ax = plt.subplots()
 ax.plot(range(1, len(Total_spend_list) + 1), Total_spend_list, label="Annual Spending")
 ax.set_title("Annual Spending After Retirement")
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Annual Spending")
 ax.legend()
+ax.grid(True)
 st.pyplot(fig)
 
 # 【六、附加说明】
