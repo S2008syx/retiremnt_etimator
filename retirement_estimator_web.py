@@ -127,7 +127,7 @@ st.pyplot(fig)
 fig, ax = plt.subplots()
 ax.plot(range(1, len(Total_spend_list) + 1), Total_spend_list, label="Annual Spending")
 ax.set_title("Annual Spending After Retirement")
-or yearx in [1, 10, 20, 30, 40, 50]:
+for yearx in [1, 10, 20, 30, 40, 50]:
     if yearx <= len(Total_spend_list):
         value = Total_spend_list[yearx - 1]
         ax.annotate(f"${value:,.0f}", (yearx, value),
