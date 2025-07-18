@@ -127,7 +127,6 @@ for yearx in [1,5,10,15,20,25,30,35,40,45,50]:
 
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Annual Tax Rate")
-plt.gca().yaxis.set_major_formatter(formatter)
 ax.legend()
 ax.grid(True)
 st.pyplot(fig)
