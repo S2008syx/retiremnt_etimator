@@ -38,7 +38,11 @@ if calculation_mode == "Use the preloaded calculator":
                         
 else:
     st.subheader("Manual 401k Input")
-    user_input = st.number_input("Current 401k Balance (for users no longer contributing)($)")
+    user_input = st.number_input(
+    "Current 401k Balance (for users no longer contributing) ($)",
+    value=0,
+    help="If you already know your current 401k balance and are no longer making contributions, enter the amount here. This will override the calculator above."
+)
 
     retire = user_input
 
