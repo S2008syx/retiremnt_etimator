@@ -1,3 +1,5 @@
+import streamlit as st
+import matplotlib.pyplot as plt
 # 【一、标题和用户输入】
 st.title("Retirement Asset Planning Simulator (By Sibo Song)")
 
