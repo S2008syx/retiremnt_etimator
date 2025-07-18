@@ -34,7 +34,7 @@ if calculation_mode == "Use the preloaded calculator":
        
                         
 else:
-  retire = user_input
+    retire = user_input
 
 retire_display.markdown(f"**Total Amount of 401k：** `${retire:,.0f}`")
 user_input = st.number_input("Current 401k Balance (for users no longer contributing) Entering your current 401k balance here will override the annual contribution and years of saving", value=0,
