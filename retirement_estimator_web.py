@@ -43,7 +43,7 @@ for _ in range(years):
     retire = (retire + store) * GroR
 if user_input != 0:
     retire = user_input
-retire_display.markdown(f"**退休总资产：** `${retire:,.0f}`")
+retire_display.markdown(f"**Total retire 401k：** `${retire:,.0f}`")
 
 # 【三、退休模拟】
 x = 1
