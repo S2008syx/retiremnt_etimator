@@ -96,7 +96,6 @@ def get_tax_rate(retire_spend):
         raise ValueError("retire_spend not within a valid range")
 
 while x < 51:
-    retire != 0:
     Total_spend = spend * (inflation ** x)
     retire_spend = spend * (inflation ** x) * portion
     tax = get_tax_rate(retire_spend)
