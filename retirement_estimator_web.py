@@ -8,7 +8,7 @@ st.title("退休资产规划模拟器（By Sibo Song）")
 years = st.slider("工作期间缴纳401k的年数", 0, 50, 25,
                   help="例如：如果你已经连续缴纳401k共15年，这里填写15。")
 
-user_input = st.number_input("当前401k账户余额（适用于已不再继续缴纳的用户）", value=0,
+user_input = st.number_input("当前401k账户余额（适用于已不再继续缴纳的用户)(若填写，则上方和下方年数和年缴金额不再生效)", value=0,
                              help="如果你还在缴纳401k，可以留空；否则请输入当前余额。")
 
 store = st.number_input("每年缴纳401k金额（退休前）", value=30000,
@@ -45,6 +45,7 @@ retire_balance = retire
 retire_list = []
 totalP_list = []
 list_tax = []
+Total_spend_list =[]
 
 def get_tax_rate(retire_spend):
     if 0 <= retire_spend <= 11925:
@@ -58,17 +59,18 @@ def get_tax_rate(retire_spend):
     elif 197301 <= retire_spend <= 250525:
         return 1 - ((197300 / retire_spend) * 0.2037 + (1 - 197300 / retire_spend) * 0.32)
     elif 250526 <= retire_spend <= 626350:
-        return 1 - ((250255 / retire_spend) * 0.2248 + (1 - 250255 / retire_spend) * 0.35)
+        return 1 - ((250225 / retire_spend) * 0.2248 + (1 - 250225 / retire_spend) * 0.35)
     elif retire_spend > 626350:
         return 1 - ((626350 / retire_spend) * 0.3014 + (1 - 626350 / retire_spend) * 0.37)
     else:
         raise ValueError("retire_spend 不在合理区间")
 
 while x < 51:
+    Total_spend = spend * (inflation ** x)
     retire_spend = spend * (inflation ** x) * portion
     tax = get_tax_rate(retire_spend)
     list_tax.append(tax)
-
+    Total_spend_list.append(Total_spend)
     prin_balance = prin_balance * interest - spend * (inflation ** x) * (1 - portion)
     retire_balance = retire_balance * interest - retire_spend / tax
     totalP = prin_balance + retire_balance
@@ -85,6 +87,7 @@ while x < 51:
 while x < 51:
     totalP = totalP * interest - spend * (inflation ** x)
     totalP_list.append(totalP)
+    Total_spend_list.append(spend * (inflation ** x))
     if totalP <= 0:
         break
     x += 1
@@ -95,6 +98,20 @@ ax.plot(range(1, len(totalP_list) + 1), totalP_list, label="Total Assets ($)")
 ax.set_title("Total Retirement Asset Over Time")
 ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Total Assets ($)")
+ax.legend()
+st.pyplot(fig)
+fig, ax = plt.subplots()
+ax.plot(range(1, len(list_tax) + 1), list_tax, label="Tax for 401k by year")
+ax.set_title("Changing tax for 401k by year")
+ax.set_xlabel("Years After Retirement")
+ax.set_ylabel("Annually Tax")
+ax.legend()
+st.pyplot(fig)
+fig, ax = plt.subplots()
+ax.plot(range(1, len(Total_spend_list) + 1), Total_spend_list, label="Annually money spend")
+ax.set_title("The annually spending after retire")
+ax.set_xlabel("Years After Retirement")
+ax.set_ylabel("Annually spend")
 ax.legend()
 st.pyplot(fig)
 
