@@ -16,7 +16,7 @@ calculation_mode = st.radio(
 retire_display = st.empty()
 
 
-if calculation_mode == "Use the preloaded calculator":
+if calculation_mode == "Use the 401K preloaded calculator":
     st.subheader("401k Growth During Accumulation Period")
     interest1 = st.number_input(
     "401k Annual Compounded Return Rate(During Accumulation Period)",
