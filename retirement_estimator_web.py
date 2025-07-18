@@ -15,7 +15,7 @@ calculation_mode = st.radio(
 
 retire_display = st.empty()
 interest1 = st.number_input(
-    "401k Annual Compounded Return Rate, During Accumulation Period",
+    "401k Annual Compounded Return Rate(During Accumulation Period)",
     value=1.06,
     help="Expected compounded annual return rate of 401k during the accumulation phase. E.g., enter 1.06 for 6%."
 )
