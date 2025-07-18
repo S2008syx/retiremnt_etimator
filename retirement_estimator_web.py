@@ -1,34 +1,29 @@
-# 运行口令：streamlit run ~/PycharmProjects/PythonProject7/.venv/bin/web1.py
-import streamlit as st
-import matplotlib.pyplot as plt
-
 # 【一、标题和用户输入】
-st.title("退休资产规划模拟器（By Sibo Song）")
+st.title("Retirement Asset Planning Simulator (By Sibo Song)")
 
-years = st.slider("工作期间缴纳401k的年数", 0, 50, 25,
-                  help="例如：如果你已经连续缴纳401k共15年，这里填写15。")
+years = st.slider("Number of Years Contributing to 401k", 0, 50, 25,
+                  help="For example: If you have contributed to your 401k for 15 years, set this to 15.")
 
+user_input = st.number_input("Current 401k Balance (for users no longer contributing)", value=0,
+                             help="If you are still contributing to your 401k, leave this blank; otherwise, enter the current balance.")
 
-store = st.number_input("每年缴纳401k金额（退休前）", value=30000,
-                        help="如果你每年继续往401k存入资金，请填写此项；否则填0。")
+store = st.number_input("Annual 401k Contribution Before Retirement", value=30000,
+                        help="Enter the amount you contribute annually to your 401k before retirement. Enter 0 if not applicable.")
 
-user_input = st.number_input("当前401k账户余额（适用于已不再继续缴纳的用户)(若填写，则上方年数和年缴金额不再生效)", value=0,
-                             help="如果你还在缴纳401k，可以留空；否则请输入当前余额。")
+prin = st.number_input("Total Other Assets at Retirement (excluding 401k)", value=5000000,
+                       help="Includes bank savings, stocks, real estate, and other liquid assets.")
 
-prin = st.number_input("退休时的其他资产总额（不包含401k）", value=5000000,
-                       help="例如银行存款、股票、房地产等可流动资产。")
+spend = st.number_input("Estimated Annual Retirement Expenses", value=200000,
+                        help="Adjust based on your lifestyle and region.")
 
-spend = st.number_input("预计每年退休生活开支", value=200000,
-                        help="根据生活水平和地区设定支出金额。")
+portion = st.slider("Proportion of Expenses Covered by 401k", 0.0, 1.0, 0.5,
+                    help="For example: 0.5 means 50% of annual spending comes from your 401k, the rest from other assets.")
 
-portion = st.slider("每年从401k中提取的资金比例", 0.0, 1.0, 0.5,
-                    help="例如：0.5 表示你每年用退休支出的 50% 来自401k，其余来自其他资产。")
+interest = st.number_input("Expected Annual Return Rate (after tax)", value=1.06,
+                           help="Expected average investment return rate for both 401k and other assets. Enter 1.06 for 6%.")
 
-interest = st.number_input("预计年化投资收益率（税后）", value=1.06,
-                           help="适用于401k与其他资产的综合投资回报率。例如6%请填写1.06。")
-
-inflation = st.number_input("预计年通货膨胀率", value=1.03,
-                            help="影响每年支出增长。例如3%通胀请填写1.03。")
+inflation = st.number_input("Expected Annual Inflation Rate", value=1.03,
+                            help="Affects growth in annual expenses. Enter 1.03 for 3% inflation.")
 
 # 【二、401k累积阶段】
 retire = 0
@@ -60,17 +55,17 @@ def get_tax_rate(retire_spend):
     elif 197301 <= retire_spend <= 250525:
         return 1 - ((197300 / retire_spend) * 0.2037 + (1 - 197300 / retire_spend) * 0.32)
     elif 250526 <= retire_spend <= 626350:
-        return 1 - ((250225 / retire_spend) * 0.2248 + (1 - 250225 / retire_spend) * 0.35)
+        return 1 - ((250525 / retire_spend) * 0.2248 + (1 - 250525 / retire_spend) * 0.35)
     elif retire_spend > 626350:
         return 1 - ((626350 / retire_spend) * 0.3014 + (1 - 626350 / retire_spend) * 0.37)
     else:
-        raise ValueError("retire_spend 不在合理区间")
+        raise ValueError("retire_spend not within a valid range")
 
 while x < 51:
     Total_spend = spend * (inflation ** x)
     retire_spend = spend * (inflation ** x) * portion
     tax = get_tax_rate(retire_spend)
-    list_tax.append(1-tax)
+    list_tax.append(tax)
     Total_spend_list.append(Total_spend)
     prin_balance = prin_balance * interest - spend * (inflation ** x) * (1 - portion)
     retire_balance = retire_balance * interest - retire_spend / tax
@@ -101,21 +96,22 @@ ax.set_xlabel("Years After Retirement")
 ax.set_ylabel("Total Assets ($)")
 ax.legend()
 st.pyplot(fig)
+
 fig, ax = plt.subplots()
 ax.plot(range(1, len(list_tax) + 1), list_tax, label="Tax Rates of 401k")
 ax.set_title("401k Tax Rate Over the Years")
 ax.set_xlabel("Years After Retirement")
-ax.set_ylabel("Annually Tax Rates")
+ax.set_ylabel("Annual Tax Rate")
 ax.legend()
 st.pyplot(fig)
+
 fig, ax = plt.subplots()
-ax.plot(range(1, len(Total_spend_list) + 1), Total_spend_list, label="Annually Money Spending")
+ax.plot(range(1, len(Total_spend_list) + 1), Total_spend_list, label="Annual Spending")
 ax.set_title("Annual Spending After Retirement")
 ax.set_xlabel("Years After Retirement")
-ax.set_ylabel("Annually Spending")
+ax.set_ylabel("Annual Spending")
 ax.legend()
 st.pyplot(fig)
 
 # 【六、附加说明】
-st.success("说明：本模拟器假设州税为0。联邦税根据分段税率计算，仅对401k取现部分生效，其他资产不纳入税收考虑。")
-
+st.success("Note: This simulator assumes zero state tax. Federal taxes are calculated based on marginal brackets and only apply to 401k withdrawals. Other assets are assumed to be tax-free.")
