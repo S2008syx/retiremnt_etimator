@@ -4,14 +4,15 @@ import matplotlib.pyplot as plt
 st.title("Retirement Asset Planning Simulator (By Sibo Song)")
 
 
-user_input = st.number_input("Current 401k Balance (for users no longer contributing)", value=0,
-                             help="If you are still contributing to your 401k, leave this blank; otherwise, enter the current balance.")
-years = st.slider("Number of Years Contributing to 401k（Entering your current 401k balance here will override the annual contribution and years of saving.0", 0, 50, 25,
+
+years = st.slider("Number of Years Contributing to 401k", 0, 50, 25,
                   help="For example: If you have contributed to your 401k for 15 years, set this to 15.")
 
 
 store = st.number_input("Annual 401k Contribution Before Retirement", value=30000,
                         help="Enter the amount you contribute annually to your 401k before retirement. Enter 0 if not applicable.")
+user_input = st.number_input("Current 401k Balance (for users no longer contributing)Entering your current 401k balance here will override the annual contribution and years of saving", value=0,
+                             help="If you are still contributing to your 401k, leave this blank; otherwise, enter the current balance.")
 
 prin = st.number_input("Total Other Assets at Retirement (excluding 401k)", value=5000000,
                        help="Includes bank savings, stocks, real estate, and other liquid assets.")
