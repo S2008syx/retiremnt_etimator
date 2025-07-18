@@ -69,7 +69,7 @@ while x < 51:
     Total_spend = spend * (inflation ** x)
     retire_spend = spend * (inflation ** x) * portion
     tax = get_tax_rate(retire_spend)
-    list_tax.append(tax)
+    list_tax.append(1-tax)
     Total_spend_list.append(Total_spend)
     prin_balance = prin_balance * interest - spend * (inflation ** x) * (1 - portion)
     retire_balance = retire_balance * interest - retire_spend / tax
@@ -108,10 +108,10 @@ ax.set_ylabel("Annually Tax")
 ax.legend()
 st.pyplot(fig)
 fig, ax = plt.subplots()
-ax.plot(range(1, len(Total_spend_list) + 1), Total_spend_list, label="Annually money spend")
+ax.plot(range(1, len(Total_spend_list) + 1), Total_spend_list, label="Annually money spending")
 ax.set_title("The annually spending after retire")
 ax.set_xlabel("Years After Retirement")
-ax.set_ylabel("Annually spend")
+ax.set_ylabel("Annually spending")
 ax.legend()
 st.pyplot(fig)
 
