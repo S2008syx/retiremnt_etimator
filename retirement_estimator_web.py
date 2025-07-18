@@ -34,11 +34,12 @@ if calculation_mode == "Use the preloaded calculator":
        
                         
 else:
+    user_input = st.number_input("Current 401k Balance (for users no longer contributing) Entering your current 401k balance here will override the annual contribution and years of saving", value=0,
+                             help="If you are still contributing to your 401k, leave this blank; otherwise, enter the current balance.")
+
     retire = user_input
 
 retire_display.markdown(f"**Total Amount of 401k：** `${retire:,.0f}`")
-user_input = st.number_input("Current 401k Balance (for users no longer contributing) Entering your current 401k balance here will override the annual contribution and years of saving", value=0,
-                             help="If you are still contributing to your 401k, leave this blank; otherwise, enter the current balance.")
 
 prin = st.number_input("Total Other Assets at Retirement (excluding 401k)", value=5000000,
                        help="Includes bank savings, stocks, real estate, and other liquid assets.")
