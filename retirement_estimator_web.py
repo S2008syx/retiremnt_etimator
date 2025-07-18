@@ -112,7 +112,7 @@ while x < 51:
         if retire_balance <= 0:
             totalP -= (1 - list_tax[-1]) * retire_list[-1]
             break
-            x += 1
+        x += 1
     else:
         break
         
