@@ -1,22 +1,41 @@
-#口令：streamlit run ~/PycharmProjects/PythonProject7/.venv/bin/web1.py
+# 运行口令：streamlit run ~/PycharmProjects/PythonProject7/.venv/bin/web1.py
 import streamlit as st
 import matplotlib.pyplot as plt
 
-# 【一、输入参数】
-st.title("退休资产模拟器（sibo_song)")
+# 【一、标题和用户输入】
+st.title("退休资产规划模拟器（By Sibo Song）")
 
-store = st.number_input("每年给401k资金(退休前给)(没有给就是0)", value=30000)
-prin = st.number_input("退休时非401k资产总额", value=5000000)
-spend = st.number_input("每年退休生活支出", value=200000)
-portion = st.slider("每年使用多少比例的401k", 0.0, 1.0, 0.5)
-interest = st.number_input("投资年收益率(401k和本金投资)(税后)", value=1.06)
-inflation = st.number_input("年通股率（你每年的支出要增长）", value=1.03)
+years = st.slider("工作期间缴纳401k的年数", 0, 50, 25,
+                  help="例如：如果你已经连续缴纳401k共15年，这里填写15。")
 
-# 【二、Ё累积阶段】
+user_input = st.number_input("当前401k账户余额（适用于已不再继续缴纳的用户）", value=0,
+                             help="如果你还在缴纳401k，可以留空；否则请输入当前余额。")
+
+store = st.number_input("每年缴纳401k金额（退休前）", value=30000,
+                        help="如果你每年继续往401k存入资金，请填写此项；否则填0。")
+
+prin = st.number_input("退休时的其他资产总额（不包含401k）", value=5000000,
+                       help="例如银行存款、股票、房地产等可流动资产。")
+
+spend = st.number_input("预计每年退休生活开支", value=200000,
+                        help="根据生活水平和地区设定支出金额。")
+
+portion = st.slider("每年从401k中提取的资金比例", 0.0, 1.0, 0.5,
+                    help="例如：0.5 表示你每年用退休支出的 50% 来自401k，其余来自其他资产。")
+
+interest = st.number_input("预计年化投资收益率（税后）", value=1.06,
+                           help="适用于401k与其他资产的综合投资回报率。例如6%请填写1.06。")
+
+inflation = st.number_input("预计年通货膨胀率", value=1.03,
+                            help="影响每年支出增长。例如3%通胀请填写1.03。")
+
+# 【二、401k累积阶段】
 retire = 0
 GroR = interest
-for _ in range(30):
+for _ in range(years):
     retire = (retire + store) * GroR
+if user_input != 0:
+    retire = user_input
 
 # 【三、退休模拟】
 x = 1
@@ -79,4 +98,6 @@ ax.set_ylabel("Total Assets ($)")
 ax.legend()
 st.pyplot(fig)
 
-st.success("本模拟器默认州税为0，并且在401k部分里以结合取出时的分段税率")
+# 【六、附加说明】
+st.success("说明：本模拟器假设州税为0。联邦税根据分段税率计算，仅对401k取现部分生效，其他资产不纳入税收考虑。")
+
